@@ -1,0 +1,205 @@
+/* Общие стили для всей страницы */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 50%, #ffd9e8 100%);
+  font-family: "Arial", "Helvetica", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Контейнер для открытки */
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px 60px;
+  border-radius: 50px;
+  box-shadow:
+    0 20px 40px rgba(255, 105, 180, 0.2),
+    0 0 0 2px rgba(255, 255, 255, 0.8) inset,
+    0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  max-width: 90%;
+  margin: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Стили для заголовка */
+h1 {
+  color: #c2185b;
+  font-size: 42px;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Стили для кнопки */
+.bth {
+  background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow:
+    0 8px 20px rgba(255, 77, 109, 0.3),
+    0 0 0 2px rgba(255, 255, 255, 0.5) inset;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Эффект при наведении на кнопку */
+.bth:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 25px rgba(255, 77, 109, 0.4),
+    0 0 0 2px rgba(255, 255, 255, 0.7) inset;
+}
+
+/* Стили для сообщения после нажатия */
+#message {
+  font-size: 28px;
+  line-height: 1.5;
+  margin: 20px 0;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.3);
+  animation: glow 2s infinite alternate;
+}
+
+/* Анимация свечения для сообщения */
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  }
+  to {
+    text-shadow: 4px 4px 8px rgba(255, 105, 180, 0.3);
+  }
+}
+
+/* Контейнер для падающих цветов */
+#flower-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Стили для падающих цветов */
+.flower {
+  position: absolute;
+  top: -10%;
+  animation: fall linear forwards;
+  text-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+  user-select: none;
+  z-index: 1000;
+}
+
+/* Анимация падения (оставляем вашу анимацию) */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(25vh) rotate(90deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(75vh) rotate(270deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Декоративные элементы фона */
+body::before {
+  content: "🌸";
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 48px;
+  opacity: 0.2;
+  transform: rotate(-15deg);
+  z-index: 0;
+}
+
+body::after {
+  content: "🌷";
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 48px;
+  opacity: 0.2;
+  transform: rotate(15deg);
+  z-index: 0;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  #message {
+    font-size: 22px;
+    padding: 15px;
+  }
+
+  .bth {
+    padding: 12px 30px;
+    font-size: 20px;
+  }
+
+  body::before,
+  body::after {
+    font-size: 32px;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  #message {
+    font-size: 18px;
+  }
+
+  .bth {
+    padding: 10px 25px;
+    font-size: 18px;
+  }
+}
