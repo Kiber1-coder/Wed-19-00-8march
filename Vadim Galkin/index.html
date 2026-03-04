@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <title>С 8 Марта, мама!</title>
+    <meta charset="UTF-8" />
+    <style>
+      /* Основные стили страницы */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(
+          45deg,
+          #fbc2eb 0%,
+          #a6c1ee 50%,
+          #fbc2eb 100%
+        );
+        background-size: 300% 300%;
+        animation: gradientBG 15s ease infinite;
+        font-family: "Segoe UI", "Arial", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Декоративные элементы фона */
+      body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 255, 255, 0.3) 0%,
+            transparent 10%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 255, 255, 0.3) 0%,
+            transparent 15%
+          ),
+          radial-gradient(
+            circle at 40% 20%,
+            rgba(255, 255, 255, 0.2) 0%,
+            transparent 20%
+          );
+        pointer-events: none;
+      }
+
+      /* Карточка */
+      .card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 50px 60px;
+        border-radius: 50px 20px 50px 20px;
+        box-shadow:
+          0 25px 50px rgba(0, 0, 0, 0.2),
+          0 0 0 2px #fff inset,
+          0 0 30px rgba(255, 105, 180, 0.5);
+        text-align: center;
+        position: relative;
+        z-index: 100;
+        max-width: 600px;
+        width: 90%;
+        animation: cardFloat 3s ease-in-out infinite;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+      }
+
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Украшения для карточки */
+      .card::after {
+        content: "🌸";
+        position: absolute;
+        top: -25px;
+        right: -25px;
+        font-size: 50px;
+        animation: spin 10s linear infinite;
+        filter: drop-shadow(0 5px 10px rgba(255, 20, 147, 0.5));
+      }
+
+      .card::before {
+        content: "🌼";
+        position: absolute;
+        bottom: -25px;
+        left: -25px;
+        font-size: 50px;
+        animation: spin 8s linear infinite reverse;
+        filter: drop-shadow(0 5px 10px rgba(255, 215, 0, 0.5));
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Заголовок */
+      .title {
+        font-size: 48px;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #ff1493, #ff69b4, #ff8da1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 3px 3px 0 rgba(255, 20, 147, 0.2);
+        font-weight: 800;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Исправление опечатки в заголовке */
+      .title {
+        position: relative;
+      }
+
+      .title::first-line {
+        font-weight: 900;
+      }
+
+      /* Текст сообщения */
+      .message {
+        font-size: 28px;
+        margin: 30px 0;
+        padding: 25px;
+        background: linear-gradient(135deg, #fff9, #fff5);
+        border-radius: 40px;
+        color: #333;
+        font-weight: 500;
+        line-height: 1.6;
+        box-shadow: 0 5px 20px rgba(255, 105, 180, 0.2);
+        border: 2px dashed #ff69b4;
+        transition: all 0.5s ease;
+      }
+
+      /* Кнопка */
+      .bth {
+        background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1);
+        color: white;
+        border: none;
+        padding: 20px 50px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 60px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow:
+          0 10px 25px rgba(255, 20, 147, 0.5),
+          0 0 0 3px #fff inset;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Эффект сияния на кнопке */
+      .bth::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -60%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.8) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+      }
+
+      .bth:hover::after {
+        opacity: 0.5;
+        animation: shine 1s ease;
+      }
+
+      @keyframes shine {
+        0% {
+          transform: translateX(-100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(45deg);
+        }
+      }
+
+      .bth:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow:
+          0 15px 35px rgba(255, 20, 147, 0.7),
+          0 0 0 4px #fff inset;
+      }
+
+      .bth:active {
+        transform: translateY(2px) scale(0.98);
+      }
+
+      /* Контейнер для цветов */
+      #flower-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      /* Стили для цветов */
+      .flower {
+        position: absolute;
+        top: -50px;
+        animation: fall linear forwards;
+        user-select: none;
+        filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+        z-index: 1;
+        text-shadow: 0 0 10px currentColor;
+      }
+
+      /* Разноцветные тени для цветов */
+      .flower:nth-child(3n) {
+        filter: drop-shadow(0 0 15px #ff1493);
+      }
+      .flower:nth-child(5n) {
+        filter: drop-shadow(0 0 15px #ffd700);
+      }
+      .flower:nth-child(7n) {
+        filter: drop-shadow(0 0 15px #87ceeb);
+      }
+      .flower:nth-child(11n) {
+        filter: drop-shadow(0 0 15px #98fb98);
+      }
+
+      @keyframes fall {
+        from {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0.5;
+        }
+      }
+
+      /* Добавляем маленькие звездочки на фон */
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .stars::after,
+      .stars::before {
+        content: "✨";
+        position: absolute;
+        font-size: 20px;
+        color: gold;
+        animation: twinkle 2s ease-in-out infinite;
+      }
+
+      .stars::before {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0.5s;
+      }
+
+      .stars::after {
+        bottom: 30%;
+        right: 15%;
+        animation-delay: 1s;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      /* Адаптация для мобильных */
+      @media (max-width: 768px) {
+        .card {
+          padding: 30px 20px;
+        }
+
+        .title {
+          font-size: 36px;
+        }
+
+        .message {
+          font-size: 22px;
+          padding: 20px;
+        }
+
+        .bth {
+          padding: 15px 30px;
+          font-size: 20px;
+        }
+
+        .card::after,
+        .card::before {
+          font-size: 35px;
+        }
+      }
+
+      /* Эффект при наведении на карточку */
+      .card:hover {
+        box-shadow:
+          0 30px 60px rgba(255, 20, 147, 0.3),
+          0 0 0 3px #fff inset,
+          0 0 40px #ff69b4;
+        transition: all 0.3s ease;
+      }
+
+      /* Дополнительные декоративные элементы */
+      .card .title::after {
+        content: "💐";
+        position: absolute;
+        font-size: 30px;
+        right: -40px;
+        top: -20px;
+        animation: bounce 2s ease infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Стили для исправленного текста после клика */
+      .message[style*="color: #ff0b4c"] {
+        background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+        transform: scale(1.02);
+        border: 3px solid #ff1493;
+        box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="mainCard">
+      <h1 class="title">Поздравляю с праздником!</h1>
+      <p class="message" id="message">Нажми на кнопку!</p>
+      <button class="bth" onclick="startMagic()">Открыть весну</button>
+    </div>
+    <div id="flower-container"></div>
+    <div class="stars"></div>
+
+    <script>
+      function startMagic() {
+        const message = document.getElementById("message");
+        const button = document.querySelector(".bth");
+        const container = document.getElementById("flower-container");
+
+        message.innerHTML = "Ты самая лучшая!<br> С праздником весны!";
+        message.style.color = "#ff0b4c";
+
+        button.style.display = "none";
+
+        const icons = ["🌹", "🌷", "🌺", "🪻", "🌼", "🌸", "🌻", "💐"];
+
+        for (let i = 0; i < 100; i++) {
+          const flower = document.createElement("div");
+          flower.classList.add("flower");
+
+          // ИСПРАВЛЕНО: Math.flower на Math.floor
+          const randomIndex = Math.floor(Math.random() * icons.length);
+          flower.innerText = icons[randomIndex];
+
+          flower.style.left = Math.random() * 100 + "vw";
+          flower.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+          // ИСПРАВЛЕНО: Math.random на Math.random()
+          flower.style.fontSize = Math.random() * 20 + 20 + "px";
+
+          // Добавляем случайную задержку для более естественного падения
+          flower.style.animationDelay = Math.random() * 2 + "s";
+
+          container.appendChild(flower);
+
+          setTimeout(() => {
+            if (flower.parentNode) {
+              flower.remove();
+            }
+          }, 7000); // Увеличил время до 7 секунд
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f0e5e5, #f0adad, 100%);
+  display: flex;
+}
