@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px 30px;
+  border-radius: 30px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 2px rgba(255, 255, 255, 0.5) inset;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  z-index: 10;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.title {
+  color: #4a1d6d;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.message {
+  color: #2d1b3c;
+  font-size: 1.3em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  font-weight: 500;
+  transition: all 0.5s ease;
+  min-height: 80px;
+}
+
+.btn {
+  background: linear-gradient(45deg, #ff6b9d, #ff1493);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.2em;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #ff1493, #ff6b9d);
+  box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+#flower-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.flower {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUp linear forwards;
+  font-size: 30px;
+  user-select: none;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  z-index: 1000;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Добавляем декоративные цветы по углам карточки */
+.card::before,
+.card::after {
+  content: "🌸";
+  position: absolute;
+  font-size: 40px;
+  opacity: 0.6;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+}
+
+.card::before {
+  top: -20px;
+  left: -20px;
+  transform: rotate(-15deg);
+}
+
+.card::after {
+  bottom: -20px;
+  right: -20px;
+  transform: rotate(15deg);
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2em;
+  }
+
+  .message {
+    font-size: 1.1em;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    font-size: 1em;
+  }
+
+  .card::before,
+  .card::after {
+    font-size: 30px;
+  }
+}
