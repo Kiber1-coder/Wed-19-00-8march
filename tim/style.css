@@ -1,0 +1,218 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  background: linear-gradient(135deg, #ffdde1 0%, #f9c9d6 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Основная открытка */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 40px 40px 40px 40px;
+  padding: 40px 30px;
+  max-width: 550px;
+  width: 90%;
+  margin: 30px auto;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 2px rgba(255, 255, 255, 0.5) inset;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  animation: cardAppear 1s ease-out;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Заголовок */
+h1 {
+  color: #c44569;
+  font-size: 3.2em;
+  margin: 0 0 15px 0;
+  text-shadow: 3px 3px 0 rgba(255, 200, 220, 0.5);
+  font-weight: 800;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+h1::after {
+  content: "🌸";
+  font-size: 0.8em;
+  margin-left: 10px;
+  animation: rotateFlower 3s infinite;
+}
+
+@keyframes rotateFlower {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* Изображение */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 30px;
+  margin: 15px 0 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border: 5px solid white;
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
+/* Текст поздравления */
+p {
+  color: #5d3a3a;
+  font-size: 1.3em;
+  line-height: 1.7;
+  margin: 20px 0 25px;
+  padding: 0 10px;
+  background: rgba(255, 240, 245, 0.7);
+  border-radius: 30px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(199, 21, 133, 0.1);
+  position: relative;
+}
+
+p::before {
+  content: "💝";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 2em;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+p::after {
+  content: "💝";
+  position: absolute;
+  bottom: -15px;
+  right: 20px;
+  font-size: 2em;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для цветов (из вашей функции) */
+#flower-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flower {
+  position: fixed;
+  font-size: 35px;
+  user-select: none;
+  animation: fall linear forwards;
+  z-index: 1;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Кнопка (из вашей функции) */
+.btn {
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  border: none;
+  color: #5d3a3a;
+  padding: 15px 40px;
+  font-size: 1.2em;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3);
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  border: 2px solid white;
+  position: relative;
+  z-index: 20;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
+  background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 600px) {
+  .card {
+    padding: 25px 15px;
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.1em;
+    padding: 20px;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+  }
+}
