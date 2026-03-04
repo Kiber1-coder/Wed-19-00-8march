@@ -1,0 +1,220 @@
+/* styles.css */
+
+/* Общие стили для страницы */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  /* Красивый градиент (переход цвета) вместо скучного синего */
+  background: linear-gradient(145deg, #654ea3, #eaafc8);
+  font-family: "Segoe UI", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  position: relative;
+}
+
+/* Стиль для открытки (белая карточка) */
+.card {
+  background: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый */
+  backdrop-filter: blur(5px); /* Эффект матового стекла */
+  padding: 2.5rem 2rem;
+  border-radius: 50px 20px 50px 20px; /* Немного игривые края */
+  box-shadow:
+    0 25px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 2px #fff3e6 inset; /* Глубокая тень и внутренняя обводка */
+  text-align: center;
+  max-width: 600px;
+  margin: 20px;
+  z-index: 10; /* Чтобы открытка была выше цветов */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Стиль заголовка */
+.titli {
+  font-size: 2.5rem;
+  color: #9b4b6e;
+  text-shadow: 3px 3px 0 #f9d9e7;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+/* НЕОНОВЫЙ ВЗРЫВ */
+
+.neon-explosion {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+  pointer-events: none;
+  z-index: 1000;
+  animation: explode 1s ease-out forwards;
+  filter: blur(0.5px);
+  mix-blend-mode: screen; /* Делает цвета ярче */
+}
+
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+    filter: blur(0px) brightness(2);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+      scale(1.2);
+    filter: blur(2px) brightness(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--x) * 1.5),
+        calc(-50% + var(--y) * 1.5)
+      )
+      scale(0.8);
+    filter: blur(4px) brightness(1.5);
+  }
+}
+
+/* Финальная вспышка */
+.neon-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  pointer-events: none;
+  z-index: 999;
+  animation: flash 0.5s ease-out forwards;
+  mix-blend-mode: screen;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+    background: white;
+    box-shadow: 0 0 100px 50px white;
+  }
+  20% {
+    opacity: 0.9;
+    background: radial-gradient(circle at center, white, transparent);
+  }
+  100% {
+    opacity: 0;
+    background: transparent;
+  }
+}
+
+/* Добавляем переменные для CSS */
+:root {
+  --x: 0px;
+  --y: 0px;
+}
+/* Стиль текста */
+.met {
+  font-size: 1.3rem;
+  color: #4a2b36;
+  background: rgba(255, 240, 245, 0.7);
+  padding: 20px;
+  border-radius: 40px 10px 40px 10px;
+  line-height: 1.6;
+  margin: 30px 0;
+  box-shadow: 0 5px 0 #d4a5b0;
+  font-weight: 500;
+}
+
+/* Стиль кнопки */
+.buton {
+  background: #ff8a9f;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 18px 35px;
+  border-radius: 60px;
+  cursor: pointer;
+  box-shadow:
+    0 10px 0 #b45f73,
+    0 5px 20px rgba(255, 138, 159, 0.6);
+  transition: all 0.1s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid #fff9;
+}
+
+.buton:hover {
+  background: #ff6b8b;
+  transform: translateY(-3px);
+  box-shadow:
+    0 13px 0 #b45f73,
+    0 8px 25px rgba(255, 107, 139, 0.8);
+}
+
+.buton:active {
+  transform: translateY(7px);
+  box-shadow: 0 3px 0 #b45f73;
+}
+
+/* Стили для контейнера, где падают цветы */
+#flover-friz {
+  position: fixed; /* Фиксируем на весь экран */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Чтобы сквозь цветы можно было нажать на кнопку */
+  z-index: 5; /* ниже открытки */
+  overflow: hidden;
+}
+
+/* Стиль для самих падающих цветов (создаются в JS) */
+.flover {
+  position: absolute;
+  top: -50px; /* Начинают падать сверху */
+  color: #fff9e6;
+  text-shadow:
+    0 0 5px #ffdab9,
+    0 0 10px #ffb6c1;
+  user-select: none;
+  opacity: 0.9;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: 1; /* Проигрывается один раз */
+  will-change: transform;
+  z-index: 1;
+}
+
+/* Анимация падения (ты её уже запускаешь в JS, но нужно описать ключевые кадры) */
+@keyframes fall {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh) rotate(360deg); /* Улетают вниз, вращаясь */
+    opacity: 0;
+  }
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 600px) {
+  .titli {
+    font-size: 2rem;
+  }
+  .met {
+    font-size: 1.1rem;
+    padding: 15px;
+  }
+  .buton {
+    font-size: 1.2rem;
+    padding: 15px 25px;
+  }
+}

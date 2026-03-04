@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <title>С 8 Марта, бабушка!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Подключаем файл со стилями (создай его) -->
+    <link rel="stylesheet" href="styl.css" />
+  </head>
+  <body>
+    <div class="card" id="mainCard">
+      <h1 class="titli">поздравляю с 8 марта</h1>
+      <!-- ВНИМАНИЕ: добавил id="met" для текста, так как в JS ты обращаешься к getElementById("met") -->
+      <p class="met" id="met">
+        хочешь авторизироваться? авторизируйся - увидишь весну! c праздником,
+        нажми кнопку
+      </p>
+      <button class="buton" onclick="startMagic()">
+        нажми кнопку, открой открытку
+      </button>
+    </div>
+
+    <!-- Контейнер для анимации цветов (дождик) -->
+    <div id="flover-friz"></div>
+
+    <!-- Наш скрипт прямо здесь, чтобы всё работало -->
+    <script>
+      // Запоминаем оригинальную функцию startMagic
+      const originalStartMagic = startMagic;
+
+      // Переопределяем функцию startMagic
+      window.startMagic = function () {
+        // Вызываем оригинальную функцию (она показывает цветы и текст)
+        originalStartMagic();
+
+        // Добавляем таймер на неоновый взрыв через 5 секунд
+        setTimeout(() => {
+          createNeonExplosion();
+        }, 5000);
+      };
+
+      // Функция для создания неонового взрыва
+      function createNeonExplosion() {
+        const container = document.getElementById("flover-friz");
+
+        // Неоновые цвета для взрыва
+        const neonColors = [
+          "#ff00ff", // розовый неон
+          "#00ffff", // голубой неон
+          "#ffff00", // желтый неон
+          "#ff0000", // красный неон
+          "#00ff00", // зеленый неон
+          "#ff6600", // оранжевый неон
+          "#9900ff", // фиолетовый неон
+        ];
+
+        // Символы для взрыва
+        const symbols = [
+          "💥",
+          "✨",
+          "⚡",
+          "🔥",
+          "💫",
+          "⭐",
+          "🌟",
+          "💢",
+          "❄️",
+          "💦",
+        ];
+
+        // СОЗДАЕМ 50 ЧАСТИЦ ВЗРЫВА!
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const explosion = document.createElement("div");
+            explosion.classList.add("neon-explosion");
+
+            // Случайный символ или просто точка
+            explosion.innerText =
+              symbols[Math.floor(Math.random() * symbols.length)];
+
+            // Случайный неоновый цвет
+            explosion.style.color =
+              neonColors[Math.floor(Math.random() * neonColors.length)];
+
+            // Начальная позиция - центр экрана
+            explosion.style.left = "50%";
+            explosion.style.top = "50%";
+
+            // Случайное направление (от -300 до 300 пикселей)
+            const x = (Math.random() - 0.5) * 600;
+            const y = (Math.random() - 0.5) * 600;
+
+            explosion.style.setProperty("--x", x + "px");
+            explosion.style.setProperty("--y", y + "px");
+
+            // Случайный размер
+            explosion.style.fontSize = Math.random() * 30 + 30 + "px";
+
+            // Неоновое свечение
+            explosion.style.textShadow = `
+          0 0 10px currentColor,
+          0 0 20px currentColor,
+          0 0 40px currentColor,
+          0 0 80px currentColor
+        `;
+
+            container.appendChild(explosion);
+
+            // Удаляем частицу через 2 секунды
+            setTimeout(() => {
+              if (explosion && explosion.parentNode) {
+                explosion.remove();
+              }
+            }, 2000);
+          }, i * 30); // Задержка между частицами для эффекта взрыва
+        }
+
+        // ФИНАЛЬНАЯ ВСПЫШКА!
+        const flash = document.createElement("div");
+        flash.classList.add("neon-flash");
+        container.appendChild(flash);
+
+        setTimeout(() => {
+          if (flash && flash.parentNode) {
+            flash.remove();
+          }
+        }, 500);
+      }
+
+      // Ловим закрытие страницы
+      window.addEventListener("beforeunload", function () {
+        // Создаем быстрое сообщение перед закрытием (не все браузеры покажут)
+        return "Не уходи! Сейчас будет неоновый взрыв! ✨";
+      });
+    </script>
+    <script>
+      function startMagic() {
+        // Исправлено: получение элемента по ID (убедись что у тега <p> есть id="met")
+        const met = document.getElementById("met");
+        const button = document.querySelector(".buton");
+        const container = document.getElementById("flover-friz"); // Исправлено: назвал переменную container
+
+        // Проверка на случай, если что-то пошло не так
+        if (!met || !button || !container) {
+          console.error("Что-то не нажал :(");
+          return;
+        }
+
+        // Меняем текст поздравления
+        met.innerHTML =
+          "Поздравляю, Нина, с Восьмым марта! Ты моя любимая бабушка! <br> Но так как восьмое марта пока не наступило, сообщение кончилось. Пока!";
+        met.style.color = "rgb(51, 17, 221)";
+
+        // Прячем кнопку
+        button.style.display = "none";
+
+        // Массив с цветочками
+        const icons = ["🌠", "🌹", "🌷", "🌺", "🥀", "🌸", "🌼", "✨"];
+
+        // Создаем 30 цветочков
+        for (let i = 0; i < 30; i++) {
+          const flover = document.createElement("div");
+          flover.classList.add("flover");
+
+          // Выбираем случайный цветок
+          flover.innerText = icons[Math.floor(Math.random() * icons.length)];
+
+          // Случайное положение слева (от 0 до ширины экрана)
+          flover.style.left = Math.random() * 100 + "%"; // Исправил vw на % для надежности
+          // Длительность анимации (от 2 до 5 секунд)
+          flover.style.animationDuration = Math.random() * 3 + 2 + "s";
+          // Размер шрифта (от 20 до 40 пикселей) - ИСПРАВЛЕНО: было math.random, стало Math.random
+          flover.style.fontSize = Math.random() * 20 + 20 + "px";
+
+          // Добавляем цветок в контейнер
+          container.appendChild(flover);
+
+          // Удаляем цветок через 5 секунд
+          setTimeout(() => {
+            if (flover && flover.parentNode) {
+              // Проверка, существует ли еще элемент
+              flover.remove();
+            }
+          }, 5000);
+        }
+      }
+    </script>
+  </body>
+</html>
